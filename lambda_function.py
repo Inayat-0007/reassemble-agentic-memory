@@ -109,7 +109,7 @@ pre{white-space:pre-wrap;word-break:break-word;background:#0b1223;border-radius:
         <div>✅ <b>Cursor Managed MCP:</b> Schema Introspection</div>
         <div>⚡ <b>Failure Injection:</b> Controlled Worker Interruption</div>
         <div>⚡ <b>Memory Dataset:</b> Seeded Demonstration Records</div>
-        <div>⚡ <b>AI Engine (Bedrock):</b> Live / Deterministic Fallback</div>
+        <div>⚡ <b>AI Engine:</b> Deterministic Fallback Mode (Reproducible Evaluation)</div>
       </div>
     </div>
   </div>
