@@ -38,84 +38,323 @@ HTML = r"""<!doctype html>
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>REASSEMBLE — Durable Agent Memory</title>
+<title>REASSEMBLE — Durable Agentic Memory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#0b1020;color:#eef2ff}
-.wrap{max-width:1180px;margin:auto;padding:24px}
-h1{margin:0;font-size:32px}.sub{color:#a9b2c7;margin:8px 0 20px}
-.grid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px}
-.card{background:#121a2f;border:1px solid #263252;border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-button{border:0;border-radius:10px;padding:11px 14px;margin:4px;cursor:pointer;font-weight:700}
-.primary{background:#7c3aed;color:#fff}.secondary{background:#25304d;color:#fff}.danger{background:#b91c1c;color:#fff}
-textarea{width:100%;min-height:92px;box-sizing:border-box;background:#0d1427;border:1px solid #2a375a;color:#fff;border-radius:10px;padding:12px}
-pre{white-space:pre-wrap;word-break:break-word;background:#0b1223;border-radius:10px;padding:12px;color:#cbd5e1}
-.badge{display:inline-block;border-radius:999px;padding:4px 8px;background:#24304d;color:#dbeafe;margin-right:5px;font-size:12px}
-.ok{color:#4ade80}.warn{color:#fbbf24}.muted{color:#94a3b8}
-.row{display:flex;flex-wrap:wrap;gap:5px}
-.small{font-size:13px}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
+:root {
+  --bg: #070b14;
+  --card-bg: rgba(15, 23, 42, 0.75);
+  --card-border: rgba(51, 65, 85, 0.6);
+  --card-hover: rgba(30, 41, 59, 0.85);
+  --primary: #6366f1;
+  --primary-glow: rgba(99, 102, 241, 0.35);
+  --danger: #ef4444;
+  --danger-glow: rgba(239, 68, 68, 0.35);
+  --success: #10b981;
+  --warning: #f59e0b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at 15% 15%, #131b31 0%, #070b14 60%, #04060a 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+.wrap { max-width: 1200px; margin: auto; padding: 32px 20px; }
+header { margin-bottom: 24px; }
+.logo-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.tagline { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
+.grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.35);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.card:hover { border-color: rgba(99, 102, 241, 0.4); }
+.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; color: #fff; }
+h3 { margin: 18px 0 8px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+.btn-bar { display: flex; flex-wrap: wrap; gap: 10px; }
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 11px 18px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #fff;
+}
+button:active { transform: scale(0.98); }
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  box-shadow: 0 4px 14px var(--primary-glow);
+  border-color: rgba(255,255,255,0.15);
+}
+.btn-primary:hover { background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%); box-shadow: 0 6px 20px var(--primary-glow); }
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 4px 14px var(--danger-glow);
+  border-color: rgba(255,255,255,0.15);
+}
+.btn-danger:hover { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); box-shadow: 0 6px 20px var(--danger-glow); }
+.btn-secondary {
+  background: #1e293b;
+  border-color: #334155;
+}
+.btn-secondary:hover { background: #334155; border-color: #475569; }
+.btn-subtle {
+  background: rgba(30, 41, 59, 0.5);
+  border-color: rgba(51, 65, 85, 0.4);
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+.btn-subtle:hover { background: rgba(51, 65, 85, 0.8); }
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 8px; }
+.chip {
+  font-size: 12px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: #c7d2fe;
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.chip:hover { background: rgba(99, 102, 241, 0.25); border-color: #818cf8; color: #fff; }
+textarea {
+  width: 100%;
+  min-height: 84px;
+  background: #090e1a;
+  border: 1px solid #1e293b;
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: #090e1a;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 16px;
+  color: #e2e8f0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin-top: 14px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.badge-ok { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.badge-warn { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+.badge-danger { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+.badge-info { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.3); }
+.pulse-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+/* Stepper Component */
+.stepper { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
+.step-node {
+  background: #090e1a;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 8px 6px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+.step-node.active { background: rgba(99, 102, 241, 0.2); border-color: var(--primary); color: #fff; font-weight: 600; }
+.step-node.completed { background: rgba(16, 185, 129, 0.15); border-color: var(--success); color: #34d399; }
+.step-node.interrupted { background: rgba(239, 68, 68, 0.15); border-color: var(--danger); color: #f87171; }
+/* Memory Cards */
+.mem-item {
+  background: #090e1a;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+.mem-item:hover { border-color: #334155; }
+.mem-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.mem-type-incident { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+.mem-type-runbook { background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.3); }
+.mem-type-lesson { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+.mem-type-architecture { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
+.mem-type-current_fact { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700; }
+.status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
+.status-box {
+  background: #090e1a;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 13px;
+}
+.status-box-title { color: #818cf8; font-weight: 700; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+.status-item { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+.muted { color: var(--text-muted); }
+.small { font-size: 12.5px; }
+@media(max-width: 900px){
+  .grid, .status-grid { grid-template-columns: 1fr; }
+  .stepper { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>REASSEMBLE</h1>
-  <div class="sub">Remember. Recover. Learn. — CockroachDB-backed durable agent memory.</div>
-
-  <div class="card">
-    <div class="row">
-      <button class="primary" onclick="startDemo()">1. Start Incident</button>
-      <button class="danger" onclick="simulateCrash()">2. Controlled Failure Injection</button>
-      <button class="secondary" onclick="resumeDemo()">3. Resume from Checkpoint</button>
-      <button class="secondary" onclick="loadMemories()">Refresh Memory</button>
-    </div>
-    <div class="small muted" style="margin-top:6px">Demonstration: Step 1 initiates investigation & commits checkpoint. Step 2 injects controlled worker failure. Step 3 reconstructs state from CockroachDB.</div>
-  </div>
-
-  <div class="grid" style="margin-top:16px">
-    <div class="card">
-      <h2>Agent Reasoning</h2>
-      <div class="small muted" style="margin-bottom:8px">Semantic vector search over CockroachDB memory + Bedrock reasoning</div>
-      <textarea id="msg" placeholder="Ask: Why is checkout latency high?"></textarea>
-      <button class="primary" onclick="chat()">Ask Agent</button>
-      <pre id="answer">No answer yet.</pre>
-    </div>
-
-    <div class="card">
-      <h2>Workflow State</h2>
-      <div id="state" class="small muted">No active workflow.</div>
-      <h3 style="margin-top:16px">Seeded Demonstration Memories</h3>
-      <div class="small muted" style="margin-bottom:8px">Stored in CockroachDB with 1024-dim Vector Index (&lt;=&gt; Cosine Distance)</div>
-      <div id="memories" class="small muted">Click 'Refresh Memory' to inspect database.</div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-top:16px">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:8px">
-      <h2 style="margin:0">System Reality & Verification Status</h2>
-      <div class="badge ok" style="background:#1e3a2b;color:#4ade80;font-weight:bold;padding:6px 12px">● ALL SERVICES OPERATIONAL</div>
-    </div>
-    <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
-      <div style="background:#0b1223;border-radius:10px;padding:12px;font-size:13px">
-        <div style="color:#a9b2c7;font-weight:bold;margin-bottom:6px">DATABASE & STATE (REAL)</div>
-        <div>✅ <b>CockroachDB Cluster:</b> LIVE (Asia-South1)</div>
-        <div>✅ <b>Durable State Machine:</b> ACID Table Rows</div>
-        <div>✅ <b>Distributed Vector Search:</b> <code>VECTOR(1024) &lt;=&gt;</code></div>
-        <div>✅ <b>State Recovery:</b> Checkpoint Reconstructed</div>
-        <div>✅ <b>Memory Evolution:</b> <code>incident-208</code> supersedes <code>143</code></div>
+  <header>
+    <div class="logo-row">
+      <div>
+        <h1>REASSEMBLE</h1>
+        <div class="tagline">Remember. Recover. Learn. — CockroachDB-backed durable agent memory.</div>
       </div>
-      <div style="background:#0b1223;border-radius:10px;padding:12px;font-size:13px">
-        <div style="color:#a9b2c7;font-weight:bold;margin-bottom:6px">DEMO FIXTURES & RUNTIME</div>
-        <div>✅ <b>AWS Lambda:</b> Serverless REST & SPA</div>
-        <div>✅ <b>Cursor Managed MCP:</b> Schema Introspection</div>
-        <div>⚡ <b>Failure Injection:</b> Controlled Worker Interruption</div>
-        <div>⚡ <b>Memory Dataset:</b> Seeded Demonstration Records</div>
-        <div>⚡ <b>AI Engine:</b> Deterministic Fallback Mode (Reproducible Evaluation)</div>
+      <div class="badge badge-ok">
+        <div class="pulse-dot"></div>
+        <span>ALL SERVICES OPERATIONAL</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Control Deck -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Interactive Incident Lifecycle Deck</h2>
+      <button class="btn-subtle" onclick="loadMemories()">🔄 Refresh Vector Store</button>
+    </div>
+    <div class="btn-bar">
+      <button class="btn-primary" onclick="startDemo()">⚡ 1. Start Incident</button>
+      <button class="btn-danger" onclick="simulateCrash()">💥 2. Controlled Failure Injection</button>
+      <button class="btn-secondary" onclick="resumeDemo()">🛡️ 3. Resume from Checkpoint</button>
+    </div>
+    <div class="small muted" style="margin-top: 10px;">
+      <b>Demonstration Flow:</b> Step 1 initiates investigation & commits checkpoint. Step 2 injects controlled worker failure. Step 3 reconstructs state from CockroachDB.
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top: 20px;">
+    <!-- Agent Reasoning Panel -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Agent Reasoning</h2>
+        <span class="badge badge-info">1024-dim Vector Cosine</span>
+      </div>
+      <div class="small muted" style="margin-bottom: 6px;">Ask questions to inspect how the agent resolves memory contradictions:</div>
+      <div class="chip-row">
+        <span class="chip" onclick="setPrompt('Why is checkout latency high?')">💡 Why is checkout latency high?</span>
+        <span class="chip" onclick="setPrompt('What is the payment service architecture?')">🔍 Architecture inquiry</span>
+      </div>
+      <textarea id="msg" placeholder="Type a question or click a prompt chip above..."></textarea>
+      <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+        <button class="btn-primary" onclick="chat()">Ask Agent</button>
+        <span id="chat-status" class="small muted"></span>
+      </div>
+      <pre id="answer">No answer yet. Click a control button or ask a question to begin.</pre>
+    </div>
+
+    <!-- Workflow State & Memory Trace -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Workflow State</h2>
+        <span id="state-badge" class="badge badge-info">IDLE</span>
+      </div>
+      <div id="state" class="small muted">No active workflow. Click '1. Start Incident' to create one.</div>
+      
+      <!-- Stepper Progress Indicator -->
+      <div class="stepper" id="stepper">
+        <div class="step-node" id="step-1">1. Checkpoint 1</div>
+        <div class="step-node" id="step-2">2. Correlate</div>
+        <div class="step-node" id="step-3">3. Validate</div>
+        <div class="step-node" id="step-4">4. Supersede</div>
+      </div>
+
+      <div class="card-header" style="margin-top: 22px;">
+        <h2>Seeded Demonstration Memories</h2>
+        <span class="badge badge-ok">CockroachDB</span>
+      </div>
+      <div class="small muted" style="margin-bottom: 10px;">Stored in CockroachDB with 1024-dim Vector Index (&lt;=&gt; Cosine Distance)</div>
+      <div id="memories" class="small muted">Click 'Refresh Vector Store' to inspect live database.</div>
+    </div>
+  </div>
+
+  <!-- System Reality & Verification Status -->
+  <div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+      <h2>System Reality & Verification Status</h2>
+      <span class="badge badge-ok">Audit Verified</span>
+    </div>
+    <div class="status-grid">
+      <div class="status-box">
+        <div class="status-box-title">Database & State Machine (REAL)</div>
+        <div class="status-item">✅ <b>CockroachDB Cluster:</b> LIVE (Asia-South1)</div>
+        <div class="status-item">✅ <b>Durable State Machine:</b> ACID Table Rows</div>
+        <div class="status-item">✅ <b>Distributed Vector Search:</b> <code>VECTOR(1024) &lt;=&gt;</code></div>
+        <div class="status-item">✅ <b>State Recovery:</b> Checkpoint Reconstructed</div>
+        <div class="status-item">✅ <b>Memory Evolution:</b> <code>incident-208</code> supersedes <code>143</code></div>
+      </div>
+      <div class="status-box">
+        <div class="status-box-title">Demo Fixtures & Runtime</div>
+        <div class="status-item">✅ <b>AWS Lambda:</b> Serverless REST & SPA</div>
+        <div class="status-item">✅ <b>Cursor Managed MCP:</b> Schema Introspection</div>
+        <div class="status-item">⚡ <b>Failure Injection:</b> Controlled Worker Interruption</div>
+        <div class="status-item">⚡ <b>Memory Dataset:</b> Seeded Demonstration Records</div>
+        <div class="status-item">⚡ <b>AI Engine:</b> Deterministic Fallback Mode (Reproducible Evaluation)</div>
       </div>
     </div>
   </div>
 </div>
+
 <script>
 let workflowId = localStorage.getItem("reassemble_workflow_id") || "";
+
+function setPrompt(txt) {
+  document.getElementById("msg").value = txt;
+}
 
 async function post(path, body={}) {
   const r = await fetch(path, {method:"POST", headers:{"content-type":"application/json"}, body:JSON.stringify(body)});
@@ -123,26 +362,73 @@ async function post(path, body={}) {
   if (j.workflow_id) { workflowId = j.workflow_id; localStorage.setItem("reassemble_workflow_id", workflowId); }
   return j;
 }
+
+function updateStepper(status, step) {
+  const s = parseInt(step) || 0;
+  for(let i=1; i<=4; i++) {
+    const el = document.getElementById("step-" + i);
+    if (!el) continue;
+    el.className = "step-node";
+    if (i < s) {
+      el.classList.add("completed");
+    } else if (i === s) {
+      if (status === "INTERRUPTED") el.classList.add("interrupted");
+      else if (status === "COMPLETED") el.classList.add("completed");
+      else el.classList.add("active");
+    }
+  }
+  const badge = document.getElementById("state-badge");
+  if (badge) {
+    badge.textContent = status || "IDLE";
+    badge.className = "badge " + (status === "COMPLETED" ? "badge-ok" : status === "INTERRUPTED" ? "badge-danger" : "badge-info");
+  }
+}
+
 function render(j){
   document.getElementById("answer").textContent = j.answer || JSON.stringify(j, null, 2);
-  if(j.state) document.getElementById("state").innerHTML =
-    `<b>Status:</b> ${j.state.status}<br><b>Step:</b> ${j.state.last_completed_step}/${j.state.total_steps}<br><b>Workflow:</b> ${j.state.workflow_id}`;
-  if(j.memories) document.getElementById("memories").innerHTML = j.memories.map(m =>
-    `<div style="padding:8px 0;border-bottom:1px solid #263252"><b>${m.memory_type}</b> · ${(m.confidence*100).toFixed(0)}%<br>${escapeHtml(m.content)}<br><span class="muted">${m.source}</span></div>`).join("");
+  if(j.state) {
+    document.getElementById("state").innerHTML =
+      `<b>Status:</b> ${escapeHtml(j.state.status)}<br><b>Step:</b> ${j.state.last_completed_step}/${j.state.total_steps}<br><b>Workflow ID:</b> <code>${escapeHtml(j.state.workflow_id)}</code>`;
+    updateStepper(j.state.status, j.state.last_completed_step);
+  }
+  if(j.memories) {
+    document.getElementById("memories").innerHTML = j.memories.map(m => {
+      const typeClass = "mem-type-" + (m.memory_type || "incident");
+      const conf = ((m.confidence || 0) * 100).toFixed(0);
+      return `<div class="mem-item">
+        <div class="mem-header">
+          <span class="badge ${typeClass}">${escapeHtml(m.memory_type || 'memory')}</span>
+          <span class="small muted">Confidence: <b>${conf}%</b></span>
+        </div>
+        <div style="font-size:13px; color:#cbd5e1; line-height:1.4; margin-bottom:4px;">${escapeHtml(m.content)}</div>
+        <div class="small muted">Source: <code>${escapeHtml(m.source || 'db')}</code></div>
+      </div>`;
+    }).join("");
+  }
 }
-function escapeHtml(s){return s.replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function escapeHtml(s){if(!s) return ""; return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 async function startDemo(){ render(await post("/api/demo/start")); }
 async function simulateCrash(){ render(await post("/api/demo/crash",{workflow_id:workflowId})); }
 async function resumeDemo(){ render(await post("/api/demo/resume",{workflow_id:workflowId})); }
 async function chat(){
-  const message=document.getElementById("msg").value.trim();
+  const msgInput = document.getElementById("msg");
+  const message = msgInput.value.trim();
   if(!message) return;
-  render(await post("/api/chat",{message,workflow_id:workflowId}));
+  const statusEl = document.getElementById("chat-status");
+  statusEl.textContent = "Querying vector index & reasoning...";
+  try {
+    const res = await post("/api/chat",{message,workflow_id:workflowId});
+    render(res);
+  } finally {
+    statusEl.textContent = "";
+  }
 }
 async function loadMemories(){ render(await post("/api/memories")); }
 </script>
 </body>
-</html>"""
+</html>
+"""
 
 def db():
     # pg8000 accepts PostgreSQL URLs via its native API only indirectly, so parse manually.
