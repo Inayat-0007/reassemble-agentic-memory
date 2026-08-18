@@ -38,323 +38,356 @@ HTML = r"""<!doctype html>
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>REASSEMBLE — Durable Agentic Memory</title>
+<title>REASSEMBLE — 2026 Durable Agentic Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #070b14;
-  --card-bg: rgba(15, 23, 42, 0.75);
-  --card-border: rgba(51, 65, 85, 0.6);
-  --card-hover: rgba(30, 41, 59, 0.85);
+  --bg: #060913;
+  --panel: rgba(13, 19, 36, 0.7);
+  --panel-border: rgba(99, 102, 241, 0.18);
+  --panel-border-hover: rgba(129, 140, 248, 0.45);
   --primary: #6366f1;
-  --primary-glow: rgba(99, 102, 241, 0.35);
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
   --danger: #ef4444;
-  --danger-glow: rgba(239, 68, 68, 0.35);
+  --danger-gradient: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   --success: #10b981;
-  --warning: #f59e0b;
+  --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
+  --code-bg: #090e1d;
 }
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: radial-gradient(circle at 15% 15%, #131b31 0%, #070b14 60%, #04060a 100%);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(217, 70, 239, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+  background-attachment: fixed;
   color: var(--text-main);
   min-height: 100vh;
-  line-height: 1.5;
-}
-.wrap { max-width: 1200px; margin: auto; padding: 32px 20px; }
-header { margin-bottom: 24px; }
-.logo-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-h1 {
-  margin: 0;
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #818cf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.tagline { color: var(--text-muted); font-size: 15px; margin-top: 4px; }
-.grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; }
-.card {
-  background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--card-border);
-  border-radius: 18px;
-  padding: 22px;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.35);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-.card:hover { border-color: rgba(99, 102, 241, 0.4); }
-.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-h2 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; color: #fff; }
-h3 { margin: 18px 0 8px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
-.btn-bar { display: flex; flex-wrap: wrap; gap: 10px; }
-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: inherit;
-  font-size: 13.5px;
-  font-weight: 600;
-  padding: 11px 18px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: #fff;
-}
-button:active { transform: scale(0.98); }
-.btn-primary {
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-  box-shadow: 0 4px 14px var(--primary-glow);
-  border-color: rgba(255,255,255,0.15);
-}
-.btn-primary:hover { background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%); box-shadow: 0 6px 20px var(--primary-glow); }
-.btn-danger {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  box-shadow: 0 4px 14px var(--danger-glow);
-  border-color: rgba(255,255,255,0.15);
-}
-.btn-danger:hover { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); box-shadow: 0 6px 20px var(--danger-glow); }
-.btn-secondary {
-  background: #1e293b;
-  border-color: #334155;
-}
-.btn-secondary:hover { background: #334155; border-color: #475569; }
-.btn-subtle {
-  background: rgba(30, 41, 59, 0.5);
-  border-color: rgba(51, 65, 85, 0.4);
-  font-size: 12px;
-  padding: 6px 12px;
-  border-radius: 8px;
-}
-.btn-subtle:hover { background: rgba(51, 65, 85, 0.8); }
-.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 8px; }
-.chip {
-  font-size: 12px;
-  background: rgba(99, 102, 241, 0.12);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  color: #c7d2fe;
-  padding: 5px 12px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.chip:hover { background: rgba(99, 102, 241, 0.25); border-color: #818cf8; color: #fff; }
-textarea {
-  width: 100%;
-  min-height: 84px;
-  background: #090e1a;
-  border: 1px solid #1e293b;
-  color: #fff;
-  border-radius: 12px;
-  padding: 12px 14px;
-  font-family: inherit;
-  font-size: 14px;
-  resize: vertical;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow); }
-pre {
-  white-space: pre-wrap;
-  word-break: break-word;
-  background: #090e1a;
-  border: 1px solid #1e293b;
-  border-radius: 12px;
-  padding: 16px;
-  color: #e2e8f0;
-  font-size: 13.5px;
   line-height: 1.6;
-  margin-top: 14px;
 }
-.badge {
-  display: inline-flex;
+.app-container { max-width: 1280px; margin: 0 auto; padding: 32px 24px; }
+/* Top Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 6px;
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 11.5px;
-  font-weight: 600;
+  margin-bottom: 28px;
+  padding: 16px 24px;
+  background: var(--panel);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
-.badge-ok { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-.badge-warn { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-.badge-danger { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
-.badge-info { background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.3); }
-.pulse-dot {
-  width: 7px; height: 7px; border-radius: 50%; background: #10b981;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-}
-/* Stepper Component */
-.stepper { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
-.step-node {
-  background: #090e1a;
-  border: 1px solid #1e293b;
-  border-radius: 8px;
-  padding: 8px 6px;
-  text-align: center;
-  font-size: 11px;
-  color: var(--text-muted);
-  transition: all 0.3s ease;
-}
-.step-node.active { background: rgba(99, 102, 241, 0.2); border-color: var(--primary); color: #fff; font-weight: 600; }
-.step-node.completed { background: rgba(16, 185, 129, 0.15); border-color: var(--success); color: #34d399; }
-.step-node.interrupted { background: rgba(239, 68, 68, 0.15); border-color: var(--danger); color: #f87171; }
-/* Memory Cards */
-.mem-item {
-  background: #090e1a;
-  border: 1px solid #1e293b;
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 8px;
-  transition: border-color 0.2s;
-}
-.mem-item:hover { border-color: #334155; }
-.mem-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.mem-type-incident { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
-.mem-type-runbook { background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.3); }
-.mem-type-lesson { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-.mem-type-architecture { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
-.mem-type-current_fact { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700; }
-.status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
-.status-box {
-  background: #090e1a;
-  border: 1px solid #1e293b;
+.brand-group { display: flex; align-items: center; gap: 14px; }
+.logo-gem {
+  width: 38px; height: 38px;
   border-radius: 12px;
-  padding: 14px;
-  font-size: 13px;
+  background: var(--primary-gradient);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
 }
-.status-box-title { color: #818cf8; font-weight: 700; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
-.status-item { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
-.muted { color: var(--text-muted); }
-.small { font-size: 12.5px; }
-@media(max-width: 900px){
-  .grid, .status-grid { grid-template-columns: 1fr; }
-  .stepper { grid-template-columns: repeat(2, 1fr); }
+.brand-title {
+  font-size: 22px; font-weight: 800; letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.brand-sub { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+.telemetry-pills { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.pulse-green {
+  width: 8px; height: 8px; border-radius: 50%; background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-ring 2s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+/* Cards & Grid */
+.grid-layout { display: grid; grid-template-columns: 1.45fr 1fr; gap: 24px; }
+.glass-panel {
+  background: var(--panel);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-panel:hover { border-color: var(--panel-border-hover); }
+/* Control Deck */
+.control-deck { margin-bottom: 24px; }
+.deck-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.deck-title h2 { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #a5b4fc; }
+.action-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 13px 22px; font-size: 14px; font-weight: 700;
+  border-radius: 14px; border: 1px solid transparent;
+  cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  color: #fff; font-family: inherit;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+.btn-start {
+  background: var(--primary-gradient);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+.btn-start:hover { box-shadow: 0 8px 26px rgba(99, 102, 241, 0.6); }
+.btn-crash {
+  background: var(--danger-gradient);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+.btn-crash:hover { box-shadow: 0 8px 26px rgba(239, 68, 68, 0.6); }
+.btn-resume {
+  background: var(--success-gradient);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+}
+.btn-resume:hover { box-shadow: 0 8px 26px rgba(16, 185, 129, 0.55); }
+.btn-ghost {
+  background: rgba(30, 41, 59, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}
+.btn-ghost:hover { background: rgba(51, 65, 85, 0.8); color: #fff; }
+/* AI Chat Area */
+.chat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.model-indicator {
+  display: flex; align-items: center; gap: 8px; font-size: 12px;
+  background: rgba(99, 102, 241, 0.12); color: #c7d2fe;
+  padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(99, 102, 241, 0.3);
+}
+.prompt-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.chip-btn {
+  font-size: 12px; font-weight: 500;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #cbd5e1; padding: 6px 14px; border-radius: 12px;
+  cursor: pointer; transition: all 0.2s;
+}
+.chip-btn:hover { background: rgba(99, 102, 241, 0.2); border-color: #818cf8; color: #fff; transform: translateY(-1px); }
+.input-wrapper { position: relative; margin-bottom: 16px; }
+textarea {
+  width: 100%; min-height: 90px;
+  background: var(--code-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff; border-radius: 16px;
+  padding: 14px 18px; font-family: inherit; font-size: 14px;
+  resize: vertical; outline: none; transition: all 0.25s;
+}
+textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25); }
+.chat-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+.stream-box {
+  background: var(--code-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 180px;
+  font-size: 14px;
+  color: #e2e8f0;
+  line-height: 1.7;
+}
+.stream-box h4 { color: #a5b4fc; margin-bottom: 8px; font-size: 15px; }
+.stream-box ol, .stream-box ul { padding-left: 20px; margin: 10px 0; }
+.stream-box li { margin-bottom: 6px; }
+.stream-box strong { color: #fff; font-weight: 700; }
+.stream-box code { font-family: 'JetBrains Mono', monospace; background: rgba(255, 255, 255, 0.08); padding: 2px 6px; border-radius: 6px; font-size: 12.5px; }
+/* Stepper Flow */
+.stepper-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 16px 0 20px; }
+.step-card {
+  background: var(--code-bg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px; padding: 10px 8px;
+  text-align: center; font-size: 11.5px;
+  color: var(--text-muted); transition: all 0.3s;
+}
+.step-card.active { background: rgba(99, 102, 241, 0.18); border-color: #6366f1; color: #fff; font-weight: 700; box-shadow: 0 0 16px rgba(99, 102, 241, 0.3); }
+.step-card.completed { background: rgba(16, 185, 129, 0.15); border-color: #10b981; color: #34d399; font-weight: 600; }
+.step-card.interrupted { background: rgba(239, 68, 68, 0.18); border-color: #ef4444; color: #f87171; font-weight: 700; animation: shake 0.4s; }
+@keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-3px);} 75% {transform: translateX(3px);} }
+/* Memory Cards */
+.memory-feed { max-height: 480px; overflow-y: auto; padding-right: 4px; }
+.memory-card {
+  background: var(--code-bg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+.memory-card:hover { border-color: rgba(99, 102, 241, 0.35); transform: translateX(2px); }
+.mem-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.badge-incident { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+.badge-runbook { background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.3); }
+.badge-lesson { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+.badge-architecture { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
+.badge-current_fact { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); font-weight: 700; }
+.conf-bar { width: 44px; height: 5px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden; margin-top: 3px; }
+.conf-fill { height: 100%; background: #34d399; border-radius: 999px; }
+/* Verification Footer */
+.status-deck { margin-top: 24px; }
+.spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; }
+.spec-box {
+  background: var(--code-bg);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px; padding: 18px; font-size: 13.5px;
+}
+.spec-header { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #818cf8; margin-bottom: 10px; }
+.spec-line { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+@media (max-width: 960px) {
+  .grid-layout, .spec-grid { grid-template-columns: 1fr; }
+  .stepper-container { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="logo-row">
+<div class="app-container">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="brand-group">
+      <div class="logo-gem">⚡</div>
       <div>
-        <h1>REASSEMBLE</h1>
-        <div class="tagline">Remember. Recover. Learn. — CockroachDB-backed durable agent memory.</div>
-      </div>
-      <div class="badge badge-ok">
-        <div class="pulse-dot"></div>
-        <span>ALL SERVICES OPERATIONAL</span>
+        <div class="brand-title">REASSEMBLE</div>
+        <div class="brand-sub">CockroachDB-Backed Durable Agentic Memory Engine</div>
       </div>
     </div>
-  </header>
+    <div class="telemetry-pills">
+      <div class="pill"><div class="pulse-green"></div><span>CockroachDB Serverless</span></div>
+      <div class="pill"><span>AWS Lambda us-east-1</span></div>
+      <div class="pill"><span>VECTOR(1024) &lt;=&gt; Cosine</span></div>
+    </div>
+  </nav>
 
   <!-- Interactive Control Deck -->
-  <div class="card">
-    <div class="card-header">
-      <h2>Interactive Incident Lifecycle Deck</h2>
-      <button class="btn-subtle" onclick="loadMemories()">🔄 Refresh Vector Store</button>
+  <section class="glass-panel control-deck">
+    <div class="deck-title">
+      <h2>Interactive Incident Lifecycle Orchestrator</h2>
+      <button class="btn btn-ghost" onclick="loadMemories()" style="padding: 8px 16px; font-size: 12px;">🔄 Sync CockroachDB Memory</button>
     </div>
-    <div class="btn-bar">
-      <button class="btn-primary" onclick="startDemo()">⚡ 1. Start Incident</button>
-      <button class="btn-danger" onclick="simulateCrash()">💥 2. Controlled Failure Injection</button>
-      <button class="btn-secondary" onclick="resumeDemo()">🛡️ 3. Resume from Checkpoint</button>
+    <div class="action-buttons">
+      <button class="btn btn-start" onclick="startDemo()">⚡ 1. Start Incident</button>
+      <button class="btn-crash" onclick="simulateCrash()">💥 2. Controlled Failure Injection</button>
+      <button class="btn-resume" onclick="resumeDemo()">🛡️ 3. Resume from Checkpoint</button>
     </div>
-    <div class="small muted" style="margin-top: 10px;">
-      <b>Demonstration Flow:</b> Step 1 initiates investigation & commits checkpoint. Step 2 injects controlled worker failure. Step 3 reconstructs state from CockroachDB.
+    <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 12px;">
+      <b>Demo Scenario:</b> Step 1 initiates investigation & commits checkpoint. Step 2 injects controlled worker failure. Step 3 reconstructs state from CockroachDB.
     </div>
-  </div>
+  </section>
 
-  <div class="grid" style="margin-top: 20px;">
-    <!-- Agent Reasoning Panel -->
-    <div class="card">
-      <div class="card-header">
-        <h2>Agent Reasoning</h2>
-        <span class="badge badge-info">1024-dim Vector Cosine</span>
+  <!-- Main Content Grid -->
+  <main class="grid-layout">
+    <!-- Agent Reasoning Console -->
+    <div class="glass-panel">
+      <div class="chat-header">
+        <h2>Agent Reasoning Console</h2>
+        <div class="model-indicator"><span>🧠</span><span>Nova Lite + Titan V2 Embeddings</span></div>
       </div>
-      <div class="small muted" style="margin-bottom: 6px;">Ask questions to inspect how the agent resolves memory contradictions:</div>
-      <div class="chip-row">
-        <span class="chip" onclick="setPrompt('Why is checkout latency high?')">💡 Why is checkout latency high?</span>
-        <span class="chip" onclick="setPrompt('What is the payment service architecture?')">🔍 Architecture inquiry</span>
-      </div>
-      <textarea id="msg" placeholder="Type a question or click a prompt chip above..."></textarea>
-      <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
-        <button class="btn-primary" onclick="chat()">Ask Agent</button>
-        <span id="chat-status" class="small muted"></span>
-      </div>
-      <pre id="answer">No answer yet. Click a control button or ask a question to begin.</pre>
-    </div>
-
-    <!-- Workflow State & Memory Trace -->
-    <div class="card">
-      <div class="card-header">
-        <h2>Workflow State</h2>
-        <span id="state-badge" class="badge badge-info">IDLE</span>
-      </div>
-      <div id="state" class="small muted">No active workflow. Click '1. Start Incident' to create one.</div>
       
-      <!-- Stepper Progress Indicator -->
-      <div class="stepper" id="stepper">
-        <div class="step-node" id="step-1">1. Checkpoint 1</div>
-        <div class="step-node" id="step-2">2. Correlate</div>
-        <div class="step-node" id="step-3">3. Validate</div>
-        <div class="step-node" id="step-4">4. Supersede</div>
+      <div class="prompt-chips">
+        <button class="chip-btn" onclick="setPrompt('Why is checkout latency high?')">💡 Why is checkout latency high?</button>
+        <button class="chip-btn" onclick="setPrompt('What is the payment service architecture?')">🔍 Architecture inquiry</button>
       </div>
 
-      <div class="card-header" style="margin-top: 22px;">
-        <h2>Seeded Demonstration Memories</h2>
-        <span class="badge badge-ok">CockroachDB</span>
+      <div class="input-wrapper">
+        <textarea id="msg" placeholder="Ask agent a question to query semantic memory... (Press Enter to submit)"></textarea>
       </div>
-      <div class="small muted" style="margin-bottom: 10px;">Stored in CockroachDB with 1024-dim Vector Index (&lt;=&gt; Cosine Distance)</div>
-      <div id="memories" class="small muted">Click 'Refresh Vector Store' to inspect live database.</div>
+      
+      <div class="chat-controls">
+        <button class="btn btn-start" onclick="chat()" style="padding: 10px 20px; font-size: 13px;">Ask Agent</button>
+        <span id="chat-status" style="font-size: 12.5px; color: #a5b4fc; font-weight: 500;"></span>
+      </div>
+
+      <div style="margin-top: 18px;">
+        <h3 style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 8px;">Reasoning Stream & Memory Synthesis</h3>
+        <div class="stream-box" id="answer">No answer yet. Trigger a step above or submit an inquiry to inspect reasoning.</div>
+      </div>
     </div>
-  </div>
+
+    <!-- Workflow State & Vector Memory -->
+    <div class="glass-panel">
+      <div class="chat-header">
+        <h2>Workflow State</h2>
+        <span id="state-badge" class="pill" style="color: #a5b4fc; font-weight: 700;">IDLE</span>
+      </div>
+      <div id="state" style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 12px;">No active workflow. Click '1. Start Incident' to begin.</div>
+
+      <!-- Stepper Nodes -->
+      <div class="stepper-container" id="stepper">
+        <div class="step-card" id="step-1">1. Checkpoint 1<br><span style="font-size: 10px; opacity: 0.7;">Initialize</span></div>
+        <div class="step-card" id="step-2">2. Correlate<br><span style="font-size: 10px; opacity: 0.7;">Evidence</span></div>
+        <div class="step-card" id="step-3">3. Validate<br><span style="font-size: 10px; opacity: 0.7;">Root Cause</span></div>
+        <div class="step-card" id="step-4">4. Supersede<br><span style="font-size: 10px; opacity: 0.7;">Commit DB</span></div>
+      </div>
+
+      <div class="chat-header" style="margin-top: 24px;">
+        <h2>Seeded Demonstration Memories</h2>
+        <span class="pill" style="font-size: 11px; color: #34d399;">VECTOR INDEX ACTIVE</span>
+      </div>
+      <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Stored in CockroachDB with 1024-dim Vector Index (&lt;=&gt; Cosine Distance)</div>
+
+      <div class="memory-feed" id="memories">Click 'Sync CockroachDB Memory' to load vector store.</div>
+    </div>
+  </main>
 
   <!-- System Reality & Verification Status -->
-  <div class="card" style="margin-top: 20px;">
-    <div class="card-header">
+  <section class="glass-panel status-deck">
+    <div class="deck-title">
       <h2>System Reality & Verification Status</h2>
-      <span class="badge badge-ok">Audit Verified</span>
+      <div class="pill" style="color: #34d399; font-weight: 700;">● ALL SYSTEMS VERIFIED</div>
     </div>
-    <div class="status-grid">
-      <div class="status-box">
-        <div class="status-box-title">Database & State Machine (REAL)</div>
-        <div class="status-item">✅ <b>CockroachDB Cluster:</b> LIVE (Asia-South1)</div>
-        <div class="status-item">✅ <b>Durable State Machine:</b> ACID Table Rows</div>
-        <div class="status-item">✅ <b>Distributed Vector Search:</b> <code>VECTOR(1024) &lt;=&gt;</code></div>
-        <div class="status-item">✅ <b>State Recovery:</b> Checkpoint Reconstructed</div>
-        <div class="status-item">✅ <b>Memory Evolution:</b> <code>incident-208</code> supersedes <code>143</code></div>
+    <div class="spec-grid">
+      <div class="spec-box">
+        <div class="spec-header">Database & State Machine (REAL)</div>
+        <div class="spec-line">✅ <b>CockroachDB Cluster:</b> LIVE (Asia-South1)</div>
+        <div class="spec-line">✅ <b>Durable State Machine:</b> ACID Table Rows</div>
+        <div class="spec-line">✅ <b>Distributed Vector Search:</b> <code>VECTOR(1024) &lt;=&gt;</code></div>
+        <div class="spec-line">✅ <b>State Recovery:</b> Checkpoint Reconstructed</div>
+        <div class="spec-line">✅ <b>Memory Evolution:</b> <code>incident-208</code> supersedes <code>143</code></div>
       </div>
-      <div class="status-box">
-        <div class="status-box-title">Demo Fixtures & Runtime</div>
-        <div class="status-item">✅ <b>AWS Lambda:</b> Serverless REST & SPA</div>
-        <div class="status-item">✅ <b>Cursor Managed MCP:</b> Schema Introspection</div>
-        <div class="status-item">⚡ <b>Failure Injection:</b> Controlled Worker Interruption</div>
-        <div class="status-item">⚡ <b>Memory Dataset:</b> Seeded Demonstration Records</div>
-        <div class="status-item">⚡ <b>AI Engine:</b> Deterministic Fallback Mode (Reproducible Evaluation)</div>
+      <div class="spec-box">
+        <div class="spec-header">Demo Fixtures & Runtime</div>
+        <div class="spec-line">✅ <b>AWS Lambda:</b> Serverless REST & SPA</div>
+        <div class="spec-line">✅ <b>Cursor Managed MCP:</b> Schema Introspection</div>
+        <div class="spec-line">⚡ <b>Failure Injection:</b> Controlled Worker Interruption</div>
+        <div class="spec-line">⚡ <b>Memory Dataset:</b> Seeded Demonstration Records</div>
+        <div class="spec-line">⚡ <b>AI Engine:</b> Deterministic Fallback Mode (Reproducible Evaluation)</div>
       </div>
     </div>
-  </div>
+  </section>
 </div>
 
 <script>
 let workflowId = localStorage.getItem("reassemble_workflow_id") || "";
 
 function setPrompt(txt) {
-  document.getElementById("msg").value = txt;
+  const el = document.getElementById("msg");
+  el.value = txt;
+  el.focus();
 }
+
+document.getElementById("msg").addEventListener("keydown", function(e) {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    chat();
+  }
+});
 
 async function post(path, body={}) {
   const r = await fetch(path, {method:"POST", headers:{"content-type":"application/json"}, body:JSON.stringify(body)});
@@ -368,7 +401,7 @@ function updateStepper(status, step) {
   for(let i=1; i<=4; i++) {
     const el = document.getElementById("step-" + i);
     if (!el) continue;
-    el.className = "step-node";
+    el.className = "step-card";
     if (i < s) {
       el.classList.add("completed");
     } else if (i === s) {
@@ -380,28 +413,50 @@ function updateStepper(status, step) {
   const badge = document.getElementById("state-badge");
   if (badge) {
     badge.textContent = status || "IDLE";
-    badge.className = "badge " + (status === "COMPLETED" ? "badge-ok" : status === "INTERRUPTED" ? "badge-danger" : "badge-info");
+    badge.style.color = (status === "COMPLETED" ? "#34d399" : status === "INTERRUPTED" ? "#f87171" : "#818cf8");
   }
 }
 
+function formatMarkdown(text) {
+  if(!text) return "";
+  let html = escapeHtml(text);
+  // Bold
+  html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  // Lists
+  html = html.replace(/^\d+\.\s+(.*)$/gm, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>)/s, '<ol>$1</ol>');
+  // Line breaks
+  html = html.replace(/\n\n/g, '<br><br>');
+  return html;
+}
+
 function render(j){
-  document.getElementById("answer").textContent = j.answer || JSON.stringify(j, null, 2);
+  const ansEl = document.getElementById("answer");
+  if (j.answer) {
+    ansEl.innerHTML = formatMarkdown(j.answer);
+  } else {
+    ansEl.textContent = JSON.stringify(j, null, 2);
+  }
+
   if(j.state) {
     document.getElementById("state").innerHTML =
-      `<b>Status:</b> ${escapeHtml(j.state.status)}<br><b>Step:</b> ${j.state.last_completed_step}/${j.state.total_steps}<br><b>Workflow ID:</b> <code>${escapeHtml(j.state.workflow_id)}</code>`;
+      `<b>Status:</b> ${escapeHtml(j.state.status)} &nbsp;|&nbsp; <b>Progress:</b> Step ${j.state.last_completed_step}/${j.state.total_steps}<br><span style="font-size:12px; opacity:0.8;">Workflow: <code>${escapeHtml(j.state.workflow_id)}</code></span>`;
     updateStepper(j.state.status, j.state.last_completed_step);
   }
   if(j.memories) {
     document.getElementById("memories").innerHTML = j.memories.map(m => {
-      const typeClass = "mem-type-" + (m.memory_type || "incident");
+      const typeClass = "badge-" + (m.memory_type || "incident");
       const conf = ((m.confidence || 0) * 100).toFixed(0);
-      return `<div class="mem-item">
-        <div class="mem-header">
-          <span class="badge ${typeClass}">${escapeHtml(m.memory_type || 'memory')}</span>
-          <span class="small muted">Confidence: <b>${conf}%</b></span>
+      return `<div class="memory-card">
+        <div class="mem-meta">
+          <span class="pill ${typeClass}" style="font-size:11px; padding:3px 10px;">${escapeHtml(m.memory_type || 'memory')}</span>
+          <div style="text-align:right;">
+            <span style="font-size:11px; color:#cbd5e1;">Confidence: <b>${conf}%</b></span>
+            <div class="conf-bar"><div class="conf-fill" style="width: ${conf}%;"></div></div>
+          </div>
         </div>
-        <div style="font-size:13px; color:#cbd5e1; line-height:1.4; margin-bottom:4px;">${escapeHtml(m.content)}</div>
-        <div class="small muted">Source: <code>${escapeHtml(m.source || 'db')}</code></div>
+        <div style="font-size:13px; color:#e2e8f0; line-height:1.5; margin-bottom:6px;">${escapeHtml(m.content)}</div>
+        <div style="font-size:11.5px; color:var(--text-muted);">Source: <code>${escapeHtml(m.source || 'db')}</code></div>
       </div>`;
     }).join("");
   }
@@ -416,7 +471,7 @@ async function chat(){
   const message = msgInput.value.trim();
   if(!message) return;
   const statusEl = document.getElementById("chat-status");
-  statusEl.textContent = "Querying vector index & reasoning...";
+  statusEl.textContent = "⚡ Querying CockroachDB Vector Index & Synthesizing...";
   try {
     const res = await post("/api/chat",{message,workflow_id:workflowId});
     render(res);
