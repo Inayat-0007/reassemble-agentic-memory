@@ -12,7 +12,7 @@
 - [x] **CHECKPOINT C**: Lambda Deployment
 - [x] **CHECKPOINT D**: Feature Testing
 - [x] **CHECKPOINT E**: MCP + GitHub
-- [ ] **CHECKPOINT F**: Submission
+- [x] **CHECKPOINT F**: Submission
 
 ---
 
@@ -95,14 +95,14 @@
 ---
 
 ### CHECKPOINT F: Submission
-- [ ] Conduct rehearsal of the 3-minute live demo script
-- [ ] Record high-definition demo video highlighting:
-  - [ ] Agent action & durable checkpointing
-  - [ ] Worker crash and recovery from CockroachDB
-  - [ ] Vector search over long-term agent memory
-  - [ ] CockroachDB Managed MCP live schema introspection
-- [ ] Prepare final Devpost / Hackathon submission copy:
-  - [ ] Architecture diagram & tech stack summary
-  - [ ] Value proposition & problem statement
-  - [ ] Links to GitHub repo, live Lambda Function URL, and demo video
-- [ ] Submit before cutoff deadline (August 19, 2026 02:30 AM IST)
+- [x] Conduct rehearsal of the 3-minute live demo script
+- [x] Record high-definition demo video highlighting:
+  - [x] Agent action & durable checkpointing
+  - [x] Worker crash and recovery from CockroachDB
+  - [x] Vector search over long-term agent memory
+  - [x] CockroachDB Managed MCP live schema introspection
+- [x] Prepare final Devpost / Hackathon submission copy:
+  - [x] Architecture diagram & tech stack summary
+  - [x] Value proposition & problem statement
+  - [x] Links to GitHub repo, live Lambda Function URL, and demo video
+- [x] Submit before cutoff deadline (August 19, 2026 02:30 AM IST)
