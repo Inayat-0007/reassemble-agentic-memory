@@ -1,0 +1,34 @@
+# === Secrets & Environment ===
+.env
+.env.local
+.env.production
+.cursor/mcp.json
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+.Python
+*.egg-info/
+dist/
+build/
+
+# === Lambda Build ===
+package/
+reassemble-lambda.zip
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
