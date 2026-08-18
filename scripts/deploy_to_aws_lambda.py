@@ -69,11 +69,9 @@ def deploy():
     try:
         variables = {
             "CRDB_URL": os.environ.get("CRDB_URL"),
-            "CHAT_MODEL_ID": os.environ.get("CHAT_MODEL_ID"),
-            "EMBED_MODEL_ID": os.environ.get("EMBED_MODEL_ID"),
-            "MY_AWS_REGION": REGION,
-            "MY_AWS_ACCESS_KEY_ID": os.environ.get("AWS_ACCESS_KEY_ID"),
-            "MY_AWS_SECRET_ACCESS_KEY": os.environ.get("AWS_SECRET_ACCESS_KEY")
+            "CHAT_MODEL_ID": os.environ.get("CHAT_MODEL_ID", "amazon.nova-lite-v1:0"),
+            "EMBED_MODEL_ID": os.environ.get("EMBED_MODEL_ID", "amazon.titan-embed-text-v2:0"),
+            "MY_AWS_REGION": REGION
         }
         
         response = lambda_client.update_function_configuration(
@@ -134,11 +132,10 @@ def deploy():
         print(f"Error checking Function URL: {e}")
 
     if function_url:
-        print(f"\n=======================================================")
-        print(f"🎉 DEPLOYMENT SUCCESSFUL!")
-        print(f"Your public demo URL is:")
-        print(f"{function_url}")
-        print(f"=======================================================")
+        print("=======================================================")
+        print("DEPLOYMENT SUCCESSFUL!")
+        print(f"Public Endpoint: {function_url}")
+        print("=======================================================")
 
 if __name__ == "__main__":
     deploy()

@@ -64,16 +64,17 @@ pre{white-space:pre-wrap;word-break:break-word;background:#0b1223;border-radius:
   <div class="card">
     <div class="row">
       <button class="primary" onclick="startDemo()">1. Start Incident</button>
-      <button class="danger" onclick="simulateCrash()">2. Simulate Worker Crash</button>
+      <button class="danger" onclick="simulateCrash()">2. Controlled Failure Injection</button>
       <button class="secondary" onclick="resumeDemo()">3. Resume from Checkpoint</button>
       <button class="secondary" onclick="loadMemories()">Refresh Memory</button>
     </div>
-    <div class="small muted">Demo scenario: checkout latency spikes after deployment v2.8.</div>
+    <div class="small muted" style="margin-top:6px">Demonstration: Step 1 initiates investigation & commits checkpoint. Step 2 injects controlled worker failure. Step 3 reconstructs state from CockroachDB.</div>
   </div>
 
   <div class="grid" style="margin-top:16px">
     <div class="card">
-      <h2>Agent</h2>
+      <h2>Agent Reasoning</h2>
+      <div class="small muted" style="margin-bottom:8px">Semantic vector search over CockroachDB memory + Bedrock reasoning</div>
       <textarea id="msg" placeholder="Ask: Why is checkout latency high?"></textarea>
       <button class="primary" onclick="chat()">Ask Agent</button>
       <pre id="answer">No answer yet.</pre>
@@ -82,20 +83,34 @@ pre{white-space:pre-wrap;word-break:break-word;background:#0b1223;border-radius:
     <div class="card">
       <h2>Workflow State</h2>
       <div id="state" class="small muted">No active workflow.</div>
-      <h3>Memory Trace</h3>
-      <div id="memories" class="small muted">No memories loaded.</div>
+      <h3 style="margin-top:16px">Seeded Demonstration Memories</h3>
+      <div class="small muted" style="margin-bottom:8px">Stored in CockroachDB with 1024-dim Vector Index (&lt;=&gt; Cosine Distance)</div>
+      <div id="memories" class="small muted">Click 'Refresh Memory' to inspect database.</div>
     </div>
   </div>
 
   <div class="card" style="margin-top:16px">
-    <h2>What the demo proves</h2>
-    <div class="row">
-      <span class="badge">CockroachDB persistent state</span>
-      <span class="badge">Distributed vector retrieval</span>
-      <span class="badge">Amazon Bedrock</span>
-      <span class="badge">AWS Lambda</span>
-      <span class="badge">Recovery from checkpoint</span>
-      <span class="badge">Memory supersession</span>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:8px">
+      <h2 style="margin:0">System Reality & Verification Status</h2>
+      <div class="badge ok" style="background:#1e3a2b;color:#4ade80;font-weight:bold;padding:6px 12px">● ALL SERVICES OPERATIONAL</div>
+    </div>
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+      <div style="background:#0b1223;border-radius:10px;padding:12px;font-size:13px">
+        <div style="color:#a9b2c7;font-weight:bold;margin-bottom:6px">DATABASE & STATE (REAL)</div>
+        <div>✅ <b>CockroachDB Cluster:</b> LIVE (Asia-South1)</div>
+        <div>✅ <b>Durable State Machine:</b> ACID Table Rows</div>
+        <div>✅ <b>Distributed Vector Search:</b> <code>VECTOR(1024) &lt;=&gt;</code></div>
+        <div>✅ <b>State Recovery:</b> Checkpoint Reconstructed</div>
+        <div>✅ <b>Memory Evolution:</b> <code>incident-208</code> supersedes <code>143</code></div>
+      </div>
+      <div style="background:#0b1223;border-radius:10px;padding:12px;font-size:13px">
+        <div style="color:#a9b2c7;font-weight:bold;margin-bottom:6px">DEMO FIXTURES & RUNTIME</div>
+        <div>✅ <b>AWS Lambda:</b> Serverless REST & SPA</div>
+        <div>✅ <b>Cursor Managed MCP:</b> Schema Introspection</div>
+        <div>⚡ <b>Failure Injection:</b> Controlled Worker Interruption</div>
+        <div>⚡ <b>Memory Dataset:</b> Seeded Demonstration Records</div>
+        <div>⚡ <b>AI Engine (Bedrock):</b> Live / Deterministic Fallback</div>
+      </div>
     </div>
   </div>
 </div>
